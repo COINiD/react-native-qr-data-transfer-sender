@@ -1,4 +1,10 @@
 {
+  "name": "react-native-qr-data-transfer-sender",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:COINiD/react-native-qr-data-transfer-sender.git",
+  "author": "rikardwissing <rikard@nocweb.se>",
+  "license": "MIT",
   "dependencies": {
     "md5": "^2.2.1",
     "react-native-qrcode-svg": "^5.1.1",
