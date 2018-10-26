@@ -166,11 +166,11 @@ class QrDataTransferReceiver extends PureComponent {
           onMomentumScrollEnd={() => { this._startNextIndexTimerWithTimeout(500); }}
           onScroll={this._indexScroll}
           style={{
-            position: 'absolute', width: 329, height: '100%',
+            position: 'absolute', width: 289, height: '100%',
           }}
-          contentContainerStyle={{ width: 329 + dataArray.length * this.indexScrollWidth }}
+          contentContainerStyle={{ width: 289 + dataArray.length * this.indexScrollWidth }}
         />
-        <View pointerEvents="none" style={{ padding: 20 }}>
+        <View pointerEvents="none">
           <QRCode
             value={dataString}
             size={289}
