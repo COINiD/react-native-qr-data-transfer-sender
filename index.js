@@ -6,7 +6,7 @@ import {
 import md5 from 'md5';
 import QRCode from 'react-native-qrcode-svg';
 
-class QrDataTransferReceiver extends PureComponent {
+class QrDataTransferSender extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -150,7 +150,7 @@ class QrDataTransferReceiver extends PureComponent {
   }
 
   render() {
-    const { renderCurrentItem, ecl, itemContainerStyle } = this.props;
+    const { renderCurrentItem, ecl, itemContainerStyle, containerStyle, qrWidth } = this.props;
     const { index, dataArray, checkSum } = this.state;
     const dataString = this._createDataString({ index, dataArray, checkSum });
 
@@ -166,14 +166,14 @@ class QrDataTransferReceiver extends PureComponent {
           onMomentumScrollEnd={() => { this._startNextIndexTimerWithTimeout(500); }}
           onScroll={this._indexScroll}
           style={{
-            position: 'absolute', width: 289, height: '100%',
+            position: 'absolute', width: qrWidth, height: '100%',
           }}
-          contentContainerStyle={{ width: 289 + dataArray.length * this.indexScrollWidth }}
+          contentContainerStyle={{ width: qrWidth + dataArray.length * this.indexScrollWidth }}
         />
-        <View pointerEvents="none">
+        <View pointerEvents="none" style={containerStyle}>
           <QRCode
             value={dataString}
-            size={289}
+            size={qrWidth}
             ecl={ecl}
           />
           <View style={itemContainerStyle}>
@@ -185,20 +185,24 @@ class QrDataTransferReceiver extends PureComponent {
   }
 }
 
-QrDataTransferReceiver.propTypes = {
+QrDataTransferSender.propTypes = {
   data: PropTypes.string,
   maxSize: PropTypes.number,
   ecl: PropTypes.string,
   renderCurrentItem: PropTypes.func,
   itemContainerStyle: ViewPropTypes.style,
+  containerStyle: ViewPropTypes.style,
+  qrWidth: PropTypes.number,
 };
 
-QrDataTransferReceiver.defaultProps = {
+QrDataTransferSender.defaultProps = {
   data: 'TESTDATA',
   maxSize: 580,
   ecl: 'L',
   renderCurrentItem: ({ index, length }) => (<Text>{ `${index + 1}/${length}` }</Text>),
   itemContainerStyle: null,
+  containerStyle: null,
+  qrWidth: 289,
 };
 
-export default QrDataTransferReceiver;
+export default QrDataTransferSender;
